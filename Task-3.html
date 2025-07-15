@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature Converter</title>
+</head>
+<body style="background-color: lightblue; font-family: Arial; text-align: center; padding-top: 50px;">
+
+  <div style="background-color: lightyellow; width: 300px; margin: auto; padding: 20px; border: 2px solid gray; border-radius: 10px;">
+
+    <h2>🌡️Rapid Temperature Converter</h2>
+
+    <label for="conversionType">Choose conversion type:</label><br>
+    <select id="conversionType" onchange="updateText()" style="margin-top: 10px;">
+      <option value="cToF">Celsius to Fahrenheit</option>
+      <option value="fToC">Fahrenheit to Celsius</option>
+    </select>
+    <br><br>
+
+    <label id="tempLabel" for="tempInput">Enter Celsius:</label><br>
+    <input type="number" id="tempInput" placeholder="Celsius"><br><br>
+
+    <button onclick="convertTemp()">Convert</button><br><br>
+
+    <p id="output"></p>
+
+  </div>
+
+  <script>
+    function updateText() {
+      var type = document.getElementById("conversionType").value;
+      var label = document.getElementById("tempLabel");
+      var input = document.getElementById("tempInput");
+      if (type === "cToF") {
+        label.innerText = "Enter Celsius:";
+        input.placeholder = "Celsius";
+      } else {
+        label.innerText = "Enter Fahrenheit:";
+        input.placeholder = "Fahrenheit";
+      }
+      document.getElementById("output").innerText = "";
+      input.value = "";
+    }
+
+    function convertTemp() {
+      var type = document.getElementById("conversionType").value;
+      var value = document.getElementById("tempInput").value;
+      var result = document.getElementById("output");
+
+      if (value === "") {
+        alert("Please enter a temperature.");
+        return;
+      }
+
+      var num = parseFloat(value);
+      if (type === "cToF") {
+        var f = (num * 9/5) + 32;
+        result.innerText = num + "°C = " + f.toFixed(2) + "°F";
+      } else {
+        var c = (num - 32) * 5/9;
+        result.innerText = num + "°F = " + c.toFixed(2) + "°C";
+      }
+    }
+  </script>
+
+</body>
+</html>
